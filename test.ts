@@ -4,7 +4,7 @@ const STATUS = new TsEnum([
   ["未开始", 0, "UNDO"],
   ["进行中", 1, "DOING"],
   ["已结束", 2, "DONE"],
-]);
+] as const);
 
 // 下拉框数据：
 // let options = STATUS.options();
@@ -19,10 +19,8 @@ const STATUS = new TsEnum([
 // console.log(keys); // ['UNDO', 'DOING', 'DONE']
 
 // 通过 key 获取 value：
-let codes = STATUS.codes;
-console.log(codes.UNDO); // 0
-console.log(codes.DOING); // 1
-console.log(codes.DONE); // 2
+let labels = STATUS.getLabels();
+labels;
 
 // 通过 value 获取 label：
 // let labels = STATUS.labels;
