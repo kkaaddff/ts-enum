@@ -31,14 +31,22 @@ type LengthOfArray<T extends readonly any[]> = Loop<T>;
 type LengthToArr<
   L extends number,
   T extends readonly any[] = [],
+  I extends number = 0,
   A extends number[] = []
 > = LengthOfArray<A> extends L
-  ? { [K in T[A[number]][0]]: T[K] }
-  : LengthToArr<L, T, [...A, LengthOfArray<A>]>;
+  ? {
+      [K in A[number] as T[K][I]]: {
+        label: T[K][0];
+        value: T[K][1];
+        code: T[K][2];
+      };
+    }
+  : LengthToArr<L, T, I, [...A, LengthOfArray<A>]>;
 
 let arr: LengthToArr<
   LengthOfArray<typeof originalOptions>,
-  typeof originalOptions
+  typeof originalOptions,
+  0
 >;
 export class TsEnum<T extends readonly any[]> {
   /**
@@ -49,7 +57,7 @@ export class TsEnum<T extends readonly any[]> {
    */
   constructor(parametersP: T) {}
 
-  getLabels(): LengthToArr<LengthOfArray<T>, T> {
+  getLabels(): LengthToArr<LengthOfArray<T>, T, 0> {
     const arr = null;
     return arr as any;
   }
