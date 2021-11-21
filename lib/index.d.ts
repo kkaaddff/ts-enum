@@ -1,48 +1,41 @@
-/*
- * @Author: Qic
- * @Description: TsEnum  支持 类型推导 和 IDE智能提示（type inference & intellisense）
- */
 /**
  * 泛型定义 :
  *  L: label 标签
  *  V: value 值
  *  C: code 代码
  */
-
-const originalOptions = [
-  ["未开始", 0, "UNDO"],
-  ["进行中", 1, "DOING"],
-  ["已结束", 2, "DONE"],
-] as const;
-
+declare const originalOptions: readonly [
+  readonly ["未开始", 0, "UNDO"],
+  readonly ["进行中", 1, "DOING"],
+  readonly ["已结束", 2, "DONE"]
+];
 /**
  * 泛型定义 :
  * 入参: 数组
  * 出参: 数组长度
  */
-type LengthOfArray<T extends readonly any[]> = Loop<T>;
-type Loop<
+declare type LengthOfArray<T extends readonly any[]> = Loop<T>;
+declare type Loop<
   S extends readonly any[],
   Count extends any[] = []
 > = S extends readonly [infer A, ...infer B]
   ? Loop<B, [...Count, 1]>
   : Count["length"];
-
 /**
  * 泛型定义 :
  * 入参：数组长度
  * 返回值：0-n的数组
  */
-type LengthToArr<
+declare type LengthToArr<
   L extends number,
   Arr extends number[] = []
 > = LengthOfArray<Arr> extends L
   ? Arr
   : LengthToArr<L, [...Arr, LengthOfArray<Arr>]>;
-
-type TupleToObject<T extends number[]> = { [K in T[number]]: K };
-
-function traverseBuild<T extends readonly any[]>(
+declare type TupleToObject<T extends number[]> = {
+  [K in T[number]]: K;
+};
+declare function traverseBuild<T extends readonly any[]>(
   arr: T
 ): {
   key: T;
@@ -55,9 +48,19 @@ function traverseBuild<T extends readonly any[]>(
       ? L
       : never;
   };
-} {
-  return arr as any;
-}
-
-const tsEnum = traverseBuild(originalOptions);
-const lab = tsEnum.labels;
+};
+declare const tsEnum: {
+  key: readonly [
+    readonly ["未开始", 0, "UNDO"],
+    readonly ["进行中", 1, "DOING"],
+    readonly ["已结束", 2, "DONE"]
+  ];
+  length: any;
+  tuple: TupleToObject<any>;
+  labels: {
+    [x: string]: unknown;
+  };
+};
+declare const lab: {
+  [x: string]: unknown;
+};
