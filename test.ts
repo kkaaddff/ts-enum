@@ -1,18 +1,22 @@
-import { TsEnum } from './index'
+import { createEnum, TsEnum } from './index'
 
-const STATUS = new TsEnum([
-  ['未开始', 0, 'UNDO'],
+const readonlyArr = createEnum([
+  ['未开始', '0', 'UNDO'],
   ['进行中', 1, 'DOING'],
   ['已结束', 2, 'DONE'],
-] as const)
+])
+
+const STATUS = new TsEnum(readonlyArr)
 
 let labels = STATUS.getLabels()
 
 let values = STATUS.getValues()
 
+values[1].label === '进行中'
+
 let codes = STATUS.getCodes()
 
-codes.DOING.label
+codes.DOING.label === '进行中'
 // 下拉框数据：
 // let options = STATUS.options();
 // console.log(options); // [ { "label": "未开始", "value": "0" }, { "label": "进行中", "value": "1" }, { "label": "已结束", "value": "2" } ]

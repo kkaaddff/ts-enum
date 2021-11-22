@@ -56,3 +56,7 @@ export class TsEnum<T extends readonly any[]> {
     return arr as any
   }
 }
+
+export function createEnum<T>(params: T): Readonly<T> {
+  return params
+}
