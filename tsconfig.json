@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "allowJs": true,
     "lib": ["ES2015", "dom"],
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "outDir": "lib" /* Redirect output structure to the directory. */,
