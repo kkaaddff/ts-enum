@@ -1,11 +1,18 @@
-import { TsEnum } from "./index";
+import { TsEnum } from './index'
 
 const STATUS = new TsEnum([
-  ["未开始", 0, "UNDO"],
-  ["进行中", 1, "DOING"],
-  ["已结束", 2, "DONE"],
-] as const);
+  ['未开始', 0, 'UNDO'],
+  ['进行中', 1, 'DOING'],
+  ['已结束', 2, 'DONE'],
+] as const)
 
+let labels = STATUS.getLabels()
+
+let values = STATUS.getValues()
+
+let codes = STATUS.getCodes()
+
+codes.DOING.label
 // 下拉框数据：
 // let options = STATUS.options();
 // console.log(options); // [ { "label": "未开始", "value": "0" }, { "label": "进行中", "value": "1" }, { "label": "已结束", "value": "2" } ]
@@ -19,8 +26,6 @@ const STATUS = new TsEnum([
 // console.log(keys); // ['UNDO', 'DOING', 'DONE']
 
 // 通过 key 获取 value：
-let labels = STATUS.getLabels();
-labels;
 
 // 通过 value 获取 label：
 // let labels = STATUS.labels;
