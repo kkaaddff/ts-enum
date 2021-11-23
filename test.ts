@@ -1,12 +1,8 @@
 import { createEnum, TsEnum } from './index'
 
-const readonlyArr = createEnum([
-  ['未开始', '0', 'UNDO'],
-  ['进行中', 1, 'DOING'],
-  ['已结束', 2, 'DONE'],
-])
+import { freeOptions } from './enum'
 
-const STATUS = new TsEnum(readonlyArr)
+const STATUS = new TsEnum(freeOptions)
 
 let labels = STATUS.getLabels()
 
