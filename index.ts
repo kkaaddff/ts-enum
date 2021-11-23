@@ -9,7 +9,9 @@ const originalOptions = [
   ['已结束', 2, 'DONE'],
 ] as const
 
-type Loop<S extends readonly any[], Count extends any[] = []> = S extends readonly [infer A, ...infer B] ? Loop<B, [...Count, 1]> : Count['length']
+type Loop<S extends readonly any[], Count extends any[] = []> = S extends readonly [infer A, ...infer B]
+  ? Loop<B, [...Count, 1]>
+  : Count['length']
 
 /**
  * 泛型定义 :
@@ -19,11 +21,20 @@ type Loop<S extends readonly any[], Count extends any[] = []> = S extends readon
 type LengthOfArray<T extends readonly any[]> = Loop<T>
 
 /**
- * 泛型定义 :
- * 入参：数组长度
- * 返回值：0-n的数组
+ * 泛型定义 : 类似 lodash keyby 的方法
+ * 入参：
+ *     L：数组长度
+ *     T：原枚举数组
+ *     I：枚举取值索引
+ *     A：记录原数据长度的数组 类似[0,1,2]
+ * 返回值：key 和 value 对象
  */
-type LengthToArr<L extends number, T extends readonly any[] = [], I extends number = 0, A extends number[] = []> = LengthOfArray<A> extends L
+type KeyBy<
+  L extends number,
+  T extends readonly any[] = [],
+  I extends number = 0,
+  A extends number[] = [],
+> = LengthOfArray<A> extends L
   ? {
       [K in A[number] as T[K][I]]: {
         label: T[K][0]
@@ -31,9 +42,9 @@ type LengthToArr<L extends number, T extends readonly any[] = [], I extends numb
         code: T[K][2]
       }
     }
-  : LengthToArr<L, T, I, [...A, LengthOfArray<A>]>
+  : KeyBy<L, T, I, [...A, LengthOfArray<A>]>
 
-let arr: LengthToArr<LengthOfArray<typeof originalOptions>, typeof originalOptions, 0>
+let arr: KeyBy<LengthOfArray<typeof originalOptions>, typeof originalOptions, 0>
 export class TsEnum<T extends readonly any[]> {
   /**
    * 泛型定义 :
@@ -43,15 +54,15 @@ export class TsEnum<T extends readonly any[]> {
    */
   constructor(parametersP: T) {}
 
-  getLabels(): LengthToArr<LengthOfArray<T>, T, 0> {
+  getLabels(): KeyBy<LengthOfArray<T>, T, 0> {
     const arr = null
     return arr as any
   }
-  getValues(): LengthToArr<LengthOfArray<T>, T, 1> {
+  getValues(): KeyBy<LengthOfArray<T>, T, 1> {
     const arr = null
     return arr as any
   }
-  getCodes(): LengthToArr<LengthOfArray<T>, T, 2> {
+  getCodes(): KeyBy<LengthOfArray<T>, T, 2> {
     const arr = null
     return arr as any
   }
@@ -60,3 +71,22 @@ export class TsEnum<T extends readonly any[]> {
 export function createEnum<T>(params: T): Readonly<T> {
   return params
 }
+/**
+ * 泛型定义 : 将 TsEnum 入参的二维数组转换为 options 对象 数组
+ * 入参：enum 二维数组
+ * 返回值：options 数组
+ */
+type EnumOptions<T extends readonly any[], Count extends any[] = []> = T extends readonly [infer A, ...infer B]
+  ? A extends readonly any[]
+    ? EnumOptions<
+        B,
+        [
+          ...Count,
+          {
+            label: A[0]
+            value: A[1]
+          },
+        ]
+      >
+    : never
+  : Count
