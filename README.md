@@ -1,5 +1,13 @@
 # `ts-enum`
 
+**解决的问题**  
+在 `ts/js` 的前端中后台项目中存在大量的枚举值，需要在各种地方引用！  
+因为`js`没有类型系统 `ts`的`enum`类型没有很强大的`api`，导致在很多情况下在各业务代码之间引用枚举时不知道此枚举的期望值是多少，可读性和`CR`体验很差
+
+## 做了什么
+
+基于业务场景，锻炼了类型体操
+
 - 借助 ts 类型系统，获得枚举值的 IDE 提示
 - 改善开发体验
 - 工具类库
@@ -13,32 +21,21 @@ import { TsEnum } from 'TsEnum' //私有库
  * 枚举值定义
  * @param {array[]} 二维数组，[label, value, key]
  */
-const STATUS = new TsEnum([
+const tsenum = new TsEnum([
   ['未开始', 0, 'UNDO'],
   ['进行中', 1, 'DOING'],
   ['已结束', 2, 'DONE'],
 ] as const) // 或 JsEnum.of(Array) 也可以
 
 // 下拉框数据：
-console.log(STATUS.options()) // [ { "label": "未开始", "value": "0" }, { "label": "进行中", "value": "1" }, { "label": "已结束", "value": "2" } ]
+console.log(tsenum.options()) // [ { "label": "未开始", "value": "0" }, { "label": "进行中", "value": "1" }, { "label": "已结束", "value": "2" } ]
 
 // 通过 key 获取 value：
-const codes = STATUS.codes
-console.log(codes.UNDO) // 0
-console.log(codes.DOING) // 1
-console.log(codes.DONE) // 2
+const codes = tsenum.getCodes()
+console.log(codes)
+codes.DOING.label // 进行中
+codes.DOING.value // 1
 
-// 通过 value 获取 label：
-const labels = STATUS.labels
-console.log(labels[0]) // 未开始
-console.log(labels[1]) // 进行中
-console.log(labels[2]) // 已结束
-
-// 获取枚举定义中所有的 value 值
-console.log(STATUS.values) // [0,1,2]
-
-// 获取枚举定义中所有的 key 值
-console.log(STATUS.keys) // ['UNDO', 'DOING', 'DONE']
 ```
 
 ## VUE/js 项目添加`typescript`支持

@@ -1,4 +1,4 @@
-import { TsEnum } from './lib/index' //私有库
+import { TsEnum } from '../lib/index' //私有库
 import { freeOptions } from './enum'
 
 /**
@@ -8,7 +8,8 @@ import { freeOptions } from './enum'
 const STATUS = new TsEnum(freeOptions) // 或 JsEnum.of(Array) 也可以
 
 // 下拉框数据：
-console.log(STATUS.options()) // [ { "label": "未开始", "value": "0" }, { "label": "进行中", "value": "1" }, { "label": "已结束", "value": "2" } ]
+const options = STATUS.options()
+console.log() // [ { "label": "未开始", "value": "0" }, { "label": "进行中", "value": "1" }, { "label": "已结束", "value": "2" } ]
 
 // 通过 key 获取 value：
 const codes = STATUS.codes

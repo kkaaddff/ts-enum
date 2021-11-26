@@ -1,16 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "allowJs": true,
-    "lib": ["ES2015", "dom"],
-    "declaration": true /* Generates corresponding '.d.ts' file. */,
-    "outDir": "lib" /* Redirect output structure to the directory. */,
-    "strict": false,
-    "strictNullChecks": false /* Enable strict null checks. */,
-    "types": [],
-    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
-    "skipLibCheck": true /* Skip type checking of declaration files. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
-  }
+    "experimentalDecorators": true,
+    "declaration": true,
+    "declarationDir": "types",
+    "importHelpers": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "outDir": "lib",
+    "rootDir": "src",
+    "strict": true,
+    "target": "ES2015",
+    "baseUrl": "."
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "lib"]
 }
