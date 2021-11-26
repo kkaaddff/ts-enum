@@ -1,5 +1,7 @@
 # `ts-enum`
 
+## [DEMO](https://codesandbox.io/embed/priceless-https-vv6my?fontsize=14&hidenavigation=1&theme=dark)
+
 ## **问题 | Motivation**
 
 在 `ts/js` 的前端中后台项目中存在大量的枚举值，需要在各种地方引用！  
@@ -30,8 +32,6 @@ $ npm install type-enum
   ["已结束", 2, "DONE"]
 ]
 ```
-
-### [DEMO](https://codesandbox.io/embed/priceless-https-vv6my?fontsize=14&hidenavigation=1&theme=dark)
 
 需要使用借助 `typescript` 的 const 断言`const assertions`  
 所以在 js 和 ts 中构建 enum 有一点差异，如下：
