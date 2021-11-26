@@ -1,6 +1,6 @@
 {
   "name": "type-enum",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "在 ts/js 获得更强的enum类型提示  ",
   "main": "lib/index.js",
   "scripts": {
@@ -20,6 +20,6 @@
   "author": "Qic",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^4.4.4"
+    "typescript": "^4"
   }
 }
