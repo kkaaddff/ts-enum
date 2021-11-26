@@ -13,10 +13,16 @@
 - 改善开发体验
 - 工具类库
 
-  枚举值定义
+## 安装
+
+```bash
+$ npm install type-enum
+```
+
+枚举值定义
 
 ```js
-import { TsEnum } from 'ts-enum'
+import { TsEnum } from 'type-enum'
 
 /**
  * 枚举值定义
