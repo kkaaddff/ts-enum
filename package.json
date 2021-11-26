@@ -1,16 +1,25 @@
 {
-  "name": "ts-enum",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./lib/index.js",
+  "name": "type-enum",
+  "version": "1.0.1",
+  "description": "在 ts/js 获得更强的enum类型提示  ",
+  "main": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "bugs": "https://github.com/kkaaddff/ts-enum/issues",
+  "homepage": "https://github.com/kkaaddff/ts-enum",
+  "keywords": [
+    "enum",
+    "ts-enum",
+    "js-enum",
+    "typescript",
+    "Type Hints",
+    "intelligence"
+  ],
+  "author": "Qic",
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^4.4.4"
   }
