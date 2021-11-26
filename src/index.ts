@@ -74,11 +74,7 @@ export class TsEnum<T extends readonly any[]> {
     this.originalEnum = param
   }
 
-  getOptions(): EnumOptions<T> {
-    return this.originalEnum.map(item => ({ label: item[0], value: item[1] })) as any
-  }
-
-  createEnum(key: 'label' | 'value' | 'code') {
+  private createEnum(key: 'label' | 'value' | 'code') {
     const result: {
       [k: string]: any
     } = {}
@@ -89,6 +85,10 @@ export class TsEnum<T extends readonly any[]> {
     })
 
     return result as any
+  }
+
+  getOptions(): EnumOptions<T> {
+    return this.originalEnum.map(item => ({ label: item[0], value: item[1] })) as any
   }
 
   getLabels(): KeyBy<LengthOfArray<T>, T, 0> {
