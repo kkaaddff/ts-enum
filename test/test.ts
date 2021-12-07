@@ -1,9 +1,9 @@
-import { IndexArray, KeyBy, LengthOfArray, TsEnum } from '../src/index'
+import { KeyBy, LengthOfArray, TsEnum } from '../src/index'
 
 const originalOptions = [
   ['未开始', 0, 'UNDO'],
   ['进行中', 1, 'DOING'],
-  ['已结束', 2, 'DONE'],
+  ['已结束', { ll: 1 }, 'DONE'],
 ] as const
 
 const originalKeys = ['label', 'value', 'code'] as const
@@ -13,8 +13,7 @@ const customKeys = tsenum.customKeys
 const options = tsenum.getOptions()
 
 customKeys
-options
-options[1].label
+const options1 = options[1]
 const codes = tsenum.getCodes()
 console.log(codes)
 codes.DOING.label
@@ -29,4 +28,3 @@ const values = tsenum.getValues()
 console.log(values)
 values[0].code
 values[1].label === '进行中'
-

@@ -49,26 +49,6 @@ export type IndexArray<
 > = LengthOfArray<A> extends LengthOfArray<T> ? A : IndexArray<T, [...A, LengthOfArray<A>]>
 
 /**
- * 泛型定义 : 类似 lodash keyby 的方法
- * 入参：
- *     L：数组长度
- *     T：原枚举数组
- *     I：枚举取值索引
- *     A：记录原数据长度的数组 类似[0,1,2]
- * 返回值：key 和 value 对象
- */
-export type ArrayToObject<
-  L extends readonly any[],
-  K extends readonly any[],
-  V extends readonly any[],
-  O extends { [key: string]: any } = {},
-> = K extends readonly [infer K1, ...infer K2]
-  ? K1 extends symbol | string | number
-    ? ArrayToObject<K2, V2, V>
-    : never
-  : O
-
-/**
  * 泛型定义 : 将 TsEnum 入参的二维数组转换为 options 对象 数组
  * 入参：enum 二维数组
  * 返回值：options 数组
@@ -84,10 +64,9 @@ export type EnumOptions<
       K,
       [
         ...R,
-        ArrayToObject<K, T[LengthOfArray<R>]>,
-        // {
-        //   [key in K[number]]: T[LengthOfArray<R>]
-        // },
+        IndexArray<K> extends number[]
+          ? { [key in IndexArray<K>[number] as K[key]]: T[LengthOfArray<R>][key] }
+          : never,
       ]
     >
 
