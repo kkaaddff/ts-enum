@@ -1,9 +1,12 @@
 /*
  * @Author: Qic
- * @Description: TsEnum  支持 类型推导 和 IDE智能提示（type inference & intellisense）
+ * @Description: TsEnum 支持 类型推导 和 IDE智能提示（type inference & intellisense）
  */
 
-export type Loop<S extends readonly any[], Count extends any[] = []> = S extends readonly [infer A, ...infer B]
+export type Loop<S extends readonly any[], Count extends any[] = []> = S extends readonly [
+  infer A,
+  ...infer B
+]
   ? Loop<B, [...Count, 1]>
   : Count['length']
 
@@ -17,49 +20,80 @@ export type LengthOfArray<T extends readonly any[]> = Loop<T>
 /**
  * 泛型定义 : 类似 lodash keyby 的方法
  * 入参：
+ *     T：原枚举数组
+ *     I：枚举取值索引
+ *     A：记录原数据长度的数组 类似[0, 1, 2]
+ * 返回值：key 和 value 对象
+ */
+export type KeyBy<
+  T extends readonly any[],
+  I extends number,
+  A extends number[] = IndexArray<T>,
+> = {
+  [key in A[number] as T[key][I]]: {
+    label: T[key][0]
+    value: T[key][1]
+    code: T[key][2]
+  }
+}
+/**
+ * 泛型定义 : 类似 lodash keyby 的方法
+ * 入参：
+ *     T：原枚举数组
+ *     A：记录原数据长度的数组 类似[0, 1, 2]
+ * 返回值：key 和 value 对象
+ */
+export type IndexArray<
+  T extends readonly any[],
+  A extends number[] = [],
+> = LengthOfArray<A> extends LengthOfArray<T> ? A : IndexArray<T, [...A, LengthOfArray<A>]>
+
+/**
+ * 泛型定义 : 类似 lodash keyby 的方法
+ * 入参：
  *     L：数组长度
  *     T：原枚举数组
  *     I：枚举取值索引
  *     A：记录原数据长度的数组 类似[0,1,2]
  * 返回值：key 和 value 对象
  */
-export type KeyBy<
-  L extends number,
-  T extends readonly any[] = [],
-  I extends number = 0,
-  A extends number[] = [],
-> = LengthOfArray<A> extends L
-  ? {
-      [K in A[number] as T[K][I]]: {
-        label: T[K][0]
-        value: T[K][1]
-        code: T[K][2]
-      }
-    }
-  : KeyBy<L, T, I, [...A, LengthOfArray<A>]>
+export type ArrayToObject<
+  L extends readonly any[],
+  K extends readonly any[],
+  V extends readonly any[],
+  O extends { [key: string]: any } = {},
+> = K extends readonly [infer K1, ...infer K2]
+  ? K1 extends symbol | string | number
+    ? ArrayToObject<K2, V2, V>
+    : never
+  : O
 
 /**
  * 泛型定义 : 将 TsEnum 入参的二维数组转换为 options 对象 数组
  * 入参：enum 二维数组
  * 返回值：options 数组
  */
-export type EnumOptions<T extends readonly any[], Count extends any[] = []> = T extends readonly [infer A, ...infer B]
-  ? A extends readonly any[]
-    ? EnumOptions<
-        B,
-        [
-          ...Count,
-          {
-            label: A[0]
-            value: A[1]
-          },
-        ]
-      >
-    : never
-  : Count
+export type EnumOptions<
+  T extends readonly any[] = [],
+  K extends readonly string[] = [],
+  R extends any[] = [],
+> = LengthOfArray<R> extends LengthOfArray<K>
+  ? R
+  : EnumOptions<
+      T,
+      K,
+      [
+        ...R,
+        ArrayToObject<K, T[LengthOfArray<R>]>,
+        // {
+        //   [key in K[number]]: T[LengthOfArray<R>]
+        // },
+      ]
+    >
 
-export class TsEnum<T extends readonly any[]> {
+export class TsEnum<T extends readonly any[], K extends readonly string[]> {
   private originalEnum: T = null
+  private _customKeys: K = null
 
   /**
    * 创建 TsEnum 实例
@@ -70,7 +104,8 @@ export class TsEnum<T extends readonly any[]> {
     ['label2', 'value2', 'code2'],
    ]}
    */
-  constructor(param: T) {
+  constructor(param: T, keys: K) {
+    this._customKeys = keys
     this.originalEnum = param
   }
 
@@ -87,19 +122,23 @@ export class TsEnum<T extends readonly any[]> {
     return result as any
   }
 
-  getOptions(): EnumOptions<T> {
+  getOptions(): EnumOptions<T, K> {
     return this.originalEnum.map(item => ({ label: item[0], value: item[1] })) as any
   }
 
-  getLabels(): KeyBy<LengthOfArray<T>, T, 0> {
+  getLabels(): KeyBy<T, 0> {
     return this.createEnum('label')
   }
 
-  getValues(): KeyBy<LengthOfArray<T>, T, 1> {
+  getValues(): KeyBy<T, 1> {
     return this.createEnum('value')
   }
 
-  getCodes(): KeyBy<LengthOfArray<T>, T, 2> {
+  getCodes(): KeyBy<T, 2> {
     return this.createEnum('code')
+  }
+
+  public get customKeys(): K {
+    return this._customKeys
   }
 }

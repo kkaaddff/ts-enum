@@ -7,7 +7,7 @@
   "tabWidth": 2,
   "quoteProps": "as-needed",
   "useTabs": false,
-  "printWidth": 120,
+  "printWidth": 100,
   "requirePragma": false,
   "semi": false,
   "trailingComma": "all",
