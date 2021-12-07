@@ -57,7 +57,7 @@ export type EnumOptions<
   T extends readonly any[] = [],
   K extends readonly string[] = [],
   R extends any[] = [],
-> = LengthOfArray<R> extends LengthOfArray<K>
+> = LengthOfArray<R> extends LengthOfArray<T>
   ? R
   : EnumOptions<
       T,
@@ -70,7 +70,13 @@ export type EnumOptions<
       ]
     >
 
-export class TsEnum<T extends readonly any[], K extends readonly string[]> {
+type TTsEnum<T extends readonly any[], K extends readonly string[]> = {
+  [key in K[number] as `get${key}`]?: any
+}
+
+interface ITsEnum<T extends readonly any[], K extends readonly string[]> extends TTsEnum<T, K> {}
+
+export class TsEnum<T extends readonly any[], K extends readonly string[]> implements TTsEnum<T, K> {
   private originalEnum: T = null
   private _customKeys: K = null
 
