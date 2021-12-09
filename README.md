@@ -53,6 +53,27 @@ const workStatusEnum = new TsEnum([
 
 ### in javascript
 
+最新的 typescript + vscode 已经支持采用 jsdoc 的方式 支持 `const assertions`  
+`vs-code >= 1.63`
+`typescript >= 4.5.2`
+
+```js
+import { TsEnum } from 'type-enum'
+
+const WORK_STATUS = /** @type {const} */ ([
+  ['未开始', 0, 'UNDO'],
+  ['进行中', 1, 'DOING'],
+  ['已结束', 2, 'DONE'],
+])
+/**
+ * 枚举值定义
+ * @param {array[]} 二维数组，[label, value, key]
+ */
+const workStatusEnum = new TsEnum(WORK_STATUS) // 必须使用 as const ！！
+```
+
+在旧版本中可以采用 `.d.ts` 补充类型提示
+
 ```js
 // src/enum/enum.js
 export const WORK_STATUS = [
