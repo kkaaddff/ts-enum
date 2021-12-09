@@ -40,8 +40,7 @@ export type KeyBy<
  * 泛型定义 : 类似 lodash keyby 的方法
  * 入参：
  *     T：原枚举数组
- *     A：记录原数据长度的数组 类似[0, 1, 2]
- * 返回值：key 和 value 对象
+ * 返回值：记录原数据长度的数组 类似[0, 1, 2]
  */
 export type IndexArray<
   T extends readonly any[],
@@ -74,11 +73,9 @@ type TTsEnum<T extends readonly any[], K extends readonly string[]> = {
   [key in K[number] as `get${key}`]?: any
 }
 
-interface ITsEnum<T extends readonly any[], K extends readonly string[]> extends TTsEnum<T, K> {}
-
-export class TsEnum<T extends readonly any[], K extends readonly string[]> implements TTsEnum<T, K> {
+const customKeys = ['label', 'value', 'code'] as const
+export class TsEnum<T extends readonly any[]> {
   private originalEnum: T = null
-  private _customKeys: K = null
 
   /**
    * 创建 TsEnum 实例
@@ -89,8 +86,8 @@ export class TsEnum<T extends readonly any[], K extends readonly string[]> imple
     ['label2', 'value2', 'code2'],
    ]}
    */
-  constructor(param: T, keys: K) {
-    this._customKeys = keys
+  constructor(param: T) {
+    // this._customKeys = keys
     this.originalEnum = param
   }
 
@@ -107,7 +104,7 @@ export class TsEnum<T extends readonly any[], K extends readonly string[]> imple
     return result as any
   }
 
-  getOptions(): EnumOptions<T, K> {
+  getOptions(): EnumOptions<T, typeof customKeys> {
     return this.originalEnum.map(item => ({ label: item[0], value: item[1] })) as any
   }
 
@@ -123,7 +120,7 @@ export class TsEnum<T extends readonly any[], K extends readonly string[]> imple
     return this.createEnum('code')
   }
 
-  public get customKeys(): K {
-    return this._customKeys
-  }
+  // public get customKeys(): K {
+  //   return this._customKeys
+  // }
 }

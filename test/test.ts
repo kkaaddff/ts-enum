@@ -5,14 +5,12 @@ const originalOptions = [
   ['进行中', 1, 'DOING', false],
   ['已结束', { ll: 1 }, 'DONE', true],
 ] as const
+// const originalKeys = ['label', 'value', 'code', 'option'] as const
 
-const originalKeys = ['label', 'value', 'code', 'option'] as const
+const tsenum = new TsEnum(originalOptions)
 
-const tsenum = new TsEnum(originalOptions, originalKeys)
-const customKeys = tsenum.customKeys
 const options = tsenum.getOptions()
-tsenum.getOK
-customKeys
+
 const options1 = options[1]
 const codes = tsenum.getCodes()
 console.log(codes)
