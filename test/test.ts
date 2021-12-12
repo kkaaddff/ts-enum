@@ -1,4 +1,4 @@
-import { KeyBy, LengthOfArray, TsEnum } from '../src/index'
+import { TsEnum } from '../src/index'
 
 const originalOptions = [
   ['未开始', 0, 'UNDO', true],
@@ -16,7 +16,7 @@ const codes = tsenum.getCodes()
 console.log(codes)
 codes.DOING.label
 codes.DOING.value
-codes.DOING.label === '进行中'
+codes.DOING.label !== '进行中'
 
 const labels = tsenum.getLabels()
 console.log(labels)
