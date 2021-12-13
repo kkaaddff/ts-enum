@@ -44,15 +44,15 @@ export class TsEnum<T extends readonly any[]> {
     return this.originalEnum.map(item => ({ label: item[0], value: item[1] })) as any
   }
 
-  getLabels(): KeyBy<T, 0> {
+  getLabels(): KeyBy<T, typeof customKeys, 0> {
     return this.createEnum('label')
   }
 
-  getValues(): KeyBy<T, 1> {
+  getValues(): KeyBy<T, typeof customKeys, 1> {
     return this.createEnum('value')
   }
 
-  getCodes(): KeyBy<T, 2> {
+  getCodes(): KeyBy<T, typeof customKeys, 2> {
     return this.createEnum('code')
   }
 
