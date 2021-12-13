@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc --watch",
     "build": "tsc"
   },
   "bugs": "https://github.com/kkaaddff/ts-enum/issues",

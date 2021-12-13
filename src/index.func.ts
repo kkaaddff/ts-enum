@@ -9,6 +9,7 @@ type TTsEnum<T extends readonly any[], K extends readonly string[]> = {
   [key in K[number] as `get${Capitalize<key>}`]?: any
 }
 
+
 const customKeys = ['label', 'value', 'code'] as const
 
 function tsEnumFunc<T extends readonly any[], K extends readonly string[]>(
