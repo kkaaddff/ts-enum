@@ -1,4 +1,4 @@
-import { TsEnum } from '../src/index'
+import { TsEnum } from '../src/index.class'
 
 const originalOptions = [
   ['未开始', 0, 'UNDO', true],

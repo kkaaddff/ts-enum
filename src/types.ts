@@ -89,7 +89,8 @@ export type EnumOptions<
     >
 
 export type TTsEnum<T extends readonly any[], K extends readonly string[]> = TTsEnumKeys<T, K> &
-  TTsEnumStatic<T, K>
+  TTsEnumStatic<T, K> &
+  void
 
 export type TTsEnumKeys<T extends readonly any[], K extends readonly string[]> = {
   [key in K[number] as `get${Capitalize<key>}s`]?: () => KeyBy<
@@ -101,4 +102,6 @@ export type TTsEnumKeys<T extends readonly any[], K extends readonly string[]> =
 
 export type TTsEnumStatic<T extends readonly any[], K extends readonly string[]> = {
   getOptions: () => EnumOptions<T, K>
+  originalEnum: T
+  originalKeys: K
 }

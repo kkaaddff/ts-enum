@@ -3,7 +3,7 @@
  * @Description: TsEnum 支持 类型推导 和 IDE智能提示（type inference & intellisense）
  */
 
-import { TTsEnum, TTsEnumStatic } from './types'
+import { EnumOptions, IndexArray, LengthOfArray, TTsEnum, TTsEnumStatic } from './types'
 
 const customKeys = ['label', 'value', 'code'] as const
 /**
@@ -17,12 +17,55 @@ const customKeys = ['label', 'value', 'code'] as const
  * @param keys ['label', 'value', 'code'] as const
  * @returns
  */
-function createCustomEnum<T extends readonly any[], K extends readonly string[]>(
+export function createCustomEnum<T extends readonly any[], K extends readonly string[]>(
   param: T,
   keys: K,
 ): TTsEnum<T, K> {
-  const originalEnum = param
-  return {} as TTsEnum<T, K>
+  if (keys.find(key => ['originalEnum', 'originalKeys', 'options'].some(k => k === key))) {
+    throw new Error('keys 不可以包含 originalEnum, originalKeys, options')
+  }
+  const _enum = {} as TTsEnum<T, K>
+
+  _enum.originalEnum = Object.freeze(param)
+  _enum.originalKeys = Object.freeze(keys)
+
+  _enum.getOptions = () => {
+    const options: unknown[] = []
+    _enum.originalEnum.forEach(item => {
+      const option: { [key: string]: any } = {}
+      _enum.originalKeys.forEach((key, index) => {
+        option[key] = item[index]
+      })
+
+      options.push(option)
+    })
+    return options as EnumOptions<T, K>
+  }
+
+  _enum.originalKeys.forEach((key, index) => {
+    // @ts-ignore
+    _enum[`get${capitalize(key)}s`] = () => {
+      const result: {
+        [k: string]: any
+      } = {}
+
+      _enum.originalEnum.forEach(item => {
+        const values: {
+          [k: string]: any
+        } = {}
+
+        _enum.originalKeys.forEach((k, i) => {
+          values[k] = item[index]
+        })
+
+        result[key] = values
+      })
+
+      return result
+    }
+  })
+
+  return _enum
 }
 
 /**
@@ -34,20 +77,10 @@ function createCustomEnum<T extends readonly any[], K extends readonly string[]>
     ['label2', 'value2', 'code2'],
    ]}
    */
-function createTsEnum<T extends readonly any[]>(param: T) {
+export function createTsEnum<T extends readonly any[]>(param: T) {
   const originalKeys = ['label', 'value', 'code'] as const
   return createCustomEnum(param, originalKeys)
 }
 
-const originalOptions = [
-  ['未开始', 0, 'UNDO', true],
-  ['进行中', 1, 'DOING', false],
-  ['已结束', { ll: 1 }, 'DONE', true],
-] as const
-
-const crmEnum = createCustomEnum(originalOptions, customKeys)
-const tsEnum = createTsEnum(originalOptions)
-const getLabels = tsEnum.getLabels()
-tsEnum.getLabels()
-getLabels.未开始.code
-const options = tsEnum.getOptions()
+export const capitalize = (str: string) =>
+  str.toLocaleLowerCase().replace(/\b[a-z]/g, char => char.toUpperCase())
