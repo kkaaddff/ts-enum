@@ -10,7 +10,8 @@ const originalKeys = ['label', 'value', 'code', 'option'] as const
 describe('function type enum', () => {
   test('createTsEnum: getOptions', () => {
     const tsenum = createTsEnum(originalEnum)
-    const originalOptions = [
+
+    const sampleOptions = [
       {
         label: '未开始',
         value: 0,
@@ -24,13 +25,14 @@ describe('function type enum', () => {
     ]
 
     const options = tsenum.getOptions()
-    expect(options).toEqual(originalOptions)
+    expect(options).toEqual(sampleOptions)
   })
   test('createTsEnum: getCodes', () => {
     const tsenum = createTsEnum(originalEnum)
 
     const codes = tsenum.getCodes()
-    const originalCodes = {
+
+    const sampleCodes = {
       UNDO: {
         label: '未开始',
         value: 0,
@@ -42,7 +44,7 @@ describe('function type enum', () => {
         code: 'DOING',
       },
     }
-    expect(codes).toEqual(originalCodes)
+    expect(codes).toEqual(sampleCodes)
   })
 
   // test('object assignment', () => {

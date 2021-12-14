@@ -5,10 +5,6 @@
 
 import { EnumOptions, KeyBy } from './types'
 
-type TTsEnum<T extends readonly any[], K extends readonly string[]> = {
-  [key in K[number] as `get${key}`]?: any
-}
-
 const customKeys = ['label', 'value', 'code'] as const
 export class TsEnum<T extends readonly any[]> {
   private originalEnum: T = null
