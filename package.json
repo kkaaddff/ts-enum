@@ -1,6 +1,6 @@
 {
   "name": "type-enum",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "在 ts/js 获得更强的enum类型提示  ",
   "main": "lib/index.js",
   "scripts": {
