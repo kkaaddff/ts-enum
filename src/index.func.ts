@@ -3,9 +3,8 @@
  * @Description: TsEnum 支持 类型推导 和 IDE智能提示（type inference & intellisense）
  */
 
-import { EnumOptions, IndexArray, LengthOfArray, TTsEnum, TTsEnumStatic } from './types'
+import { EnumOptions, TTsEnum } from './types'
 
-const customKeys = ['label', 'value', 'code'] as const
 /**
  * 创建自定义枚举 ： keys 为自定义的 key
  * @param param 二维数组 必须使用 as const 断言 转换成类型 
@@ -49,16 +48,15 @@ export function createCustomEnum<T extends readonly any[], K extends readonly st
         [k: string]: any
       } = {}
 
-      _enum.originalEnum.forEach(item => {
+      _enum.originalEnum.forEach((item: any[]) => {
         const values: {
           [k: string]: any
         } = {}
-
-        _enum.originalKeys.forEach((k, i) => {
-          values[k] = item[index]
+        item.forEach((value, i) => {
+          values[_enum.originalKeys[i]] = value
         })
 
-        result[key] = values
+        result[item[index]] = values
       })
 
       return result
