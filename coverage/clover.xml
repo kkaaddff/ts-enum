@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1639579912922" clover="3.2.0">
+  <project timestamp="1639579912922" name="All files">
+    <metrics statements="29" coveredstatements="28" conditionals="1" coveredconditionals="0" methods="13" coveredmethods="13" elements="43" coveredelements="41" complexity="0" loc="29" ncloc="29" packages="1" files="1" classes="1"/>
+    <file name="index.func.ts" path="D:\ymm2021\ts-enum\src\index.func.ts">
+      <metrics statements="29" coveredstatements="28" conditionals="1" coveredconditionals="0" methods="13" coveredmethods="13"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="23" count="18" type="cond" truecount="0" falsecount="1"/>
+      <line num="24" count="0" type="stmt"/>
+      <line num="26" count="2" type="stmt"/>
+      <line num="28" count="2" type="stmt"/>
+      <line num="29" count="2" type="stmt"/>
+      <line num="31" count="2" type="stmt"/>
+      <line num="32" count="1" type="stmt"/>
+      <line num="33" count="1" type="stmt"/>
+      <line num="34" count="2" type="stmt"/>
+      <line num="35" count="2" type="stmt"/>
+      <line num="36" count="6" type="stmt"/>
+      <line num="39" count="2" type="stmt"/>
+      <line num="41" count="1" type="stmt"/>
+      <line num="44" count="2" type="stmt"/>
+      <line num="46" count="6" type="stmt"/>
+      <line num="49" count="1" type="stmt"/>
+      <line num="51" count="1" type="stmt"/>
+      <line num="54" count="2" type="stmt"/>
+      <line num="55" count="2" type="stmt"/>
+      <line num="56" count="6" type="stmt"/>
+      <line num="59" count="2" type="stmt"/>
+      <line num="62" count="1" type="stmt"/>
+      <line num="66" count="2" type="stmt"/>
+      <line num="78" count="1" type="stmt"/>
+      <line num="79" count="2" type="stmt"/>
+      <line num="80" count="2" type="stmt"/>
+      <line num="83" count="1" type="stmt"/>
+      <line num="84" count="6" type="stmt"/>
+    </file>
+  </project>
+</coverage>

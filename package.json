@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage",
     "start": "tsc --watch",
     "build": "tsc"
   },
