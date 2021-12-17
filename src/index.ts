@@ -1,2 +1,2 @@
-export { TsEnum } from './index.class'
-export { createCustomEnum, createTsEnum } from './index.func'
+export { TsEnum } from './class'
+export { createCustomEnum, createTsEnum } from './func'

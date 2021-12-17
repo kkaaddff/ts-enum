@@ -37,7 +37,7 @@ export class TsEnum<T extends readonly any[]> {
   }
 
   getOptions(): EnumOptions<T, typeof customKeys> {
-    return this.originalEnum.map(item => ({ label: item[0], value: item[1] })) as any
+    return this.originalEnum.map(item => ({ label: item[0], value: item[1], code: item[2] })) as any
   }
 
   getLabels(): KeyBy<T, typeof customKeys, 0> {

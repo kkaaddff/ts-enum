@@ -20,8 +20,8 @@ export function createCustomEnum<T extends readonly any[], K extends readonly st
   param: T,
   keys: K,
 ): TTsEnum<T, K> {
-  if (keys.find(key => ['originalEnum', 'originalKeys', 'options'].some(k => k === key))) {
-    throw new Error('keys 不可以包含 originalEnum, originalKeys, options')
+  if (keys.find(key => ['originalEnum', 'originalKeys', 'option'].some(k => k === key))) {
+    throw new Error('keys 不可以包含 originalEnum, originalKeys, option')
   }
   const _enum = {} as TTsEnum<T, K>
 

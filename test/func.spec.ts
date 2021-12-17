@@ -1,11 +1,9 @@
-import { createTsEnum, createCustomEnum } from '../src/index.func'
+import { createTsEnum, createCustomEnum } from '../src/func'
 
 const originalEnum = [
   ['未开始', 0, 'UNDO'],
   ['进行中', 1, 'DOING'],
 ] as const
-
-const originalKeys = ['label', 'value', 'code', 'option'] as const
 
 describe('function type enum', () => {
   test('createTsEnum: getOptions', () => {
@@ -47,8 +45,11 @@ describe('function type enum', () => {
     expect(codes).toEqual(sampleCodes)
   })
 
-  // test('object assignment', () => {
-  //   const data = { one: 1 }
-  //   data['two'] = 2
-  // })
+  test('createCustomEnum: invaild keys', () => {
+    const invaildKeys = ['label', 'value', 'code', 'option'] as const
+
+    expect(() => {
+      const tsenum = createCustomEnum(originalEnum, invaildKeys)
+    }).toThrow('keys 不可以包含 originalEnum, originalKeys, option')
+  })
 })
