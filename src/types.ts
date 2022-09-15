@@ -29,7 +29,6 @@ export type LengthOfArray<S extends readonly any[], Count extends any[] = []> = 
  */
 export type KeyBy<
   T extends readonly any[],
-  K extends readonly string[],
   I extends number,
   A extends number[] = IndexArray<T>,
 > = {
@@ -95,7 +94,6 @@ export type TTsEnum<T extends readonly any[], K extends readonly string[]> = TTs
 export type TTsEnumKeys<T extends readonly any[], K extends readonly string[]> = {
   [key in K[number] as `get${Capitalize<key>}s`]?: () => KeyBy<
     T,
-    K,
     IndexObject<K, key> extends number ? IndexObject<K, key> : never
   >
 }
