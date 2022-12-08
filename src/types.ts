@@ -1,7 +1,7 @@
 /**
  * 泛型定义 : 字符串首字母大写
- * 入参：'string'
- * 返回值：'String'
+ * @param 'string'
+ * @return 'String'
  */
 export type Capitalize<S extends string> = S extends `${infer First}${infer Rest}`
   ? `${Uppercase<First>}${Rest}`
@@ -9,23 +9,22 @@ export type Capitalize<S extends string> = S extends `${infer First}${infer Rest
 
 /**
  * 泛型定义 :
- * 入参: 数组
- * 出参: 数组长度
+ * @param 数组
+ * @return 数组长度
  */
 export type LengthOfArray<S extends readonly any[], Count extends any[] = []> = S extends readonly [
   infer A,
-  ...infer B
+  ...infer B,
 ]
   ? LengthOfArray<B, [...Count, 1]>
   : Count['length']
 
 /**
  * 泛型定义 : 类似 lodash keyby 的方法
- * 入参：
- *     T：原枚举数组
- *     I：枚举取值索引
- *     A：记录原数据长度的数组 类似[0, 1, 2]
- * 返回值：key 和 value 对象
+ * @param   T：原枚举数组
+ * @param   I：枚举取值索引
+ * @param   A：记录原数据长度的数组 类似[0, 1, 2]
+ * @return key 和 value 对象
  */
 export type KeyBy<
   T extends readonly any[],
@@ -40,9 +39,8 @@ export type KeyBy<
 }
 /**
  * 泛型定义 : 获取索引数组
- * 入参：
- *     T：原枚举数组
- * 返回值：记录原数据长度的数组 类似[0, 1, 2]
+ * @param  T：原枚举数组
+ * @return 记录原数据长度的数组 类似[0, 1, 2]
  */
 export type IndexArray<
   T extends readonly any[],
@@ -51,9 +49,8 @@ export type IndexArray<
 
 /**
  * 泛型定义 : 获取 { label: index } 的对象
- * 入参：
- *     T：labels 数组
- * 返回值：记录原数据长度的数组 类似 { label: 0, value: 1, code: 2 }
+ * @param K labels 数组
+ * @return 记录原数据长度的数组 类似 { label: 0, value: 1, code: 2 }
  */
 export type IndexObject<
   K extends readonly string[],
@@ -67,8 +64,8 @@ export type IndexObject<
 
 /**
  * 泛型定义 : 将 TsEnum 入参的二维数组转换为 options 对象 数组
- * 入参：enum 二维数组
- * 返回值：options 数组
+ * @param  enum 二维数组
+ * @return options 数组
  */
 export type EnumOptions<
   T extends readonly any[],
@@ -92,7 +89,7 @@ export type TTsEnum<T extends readonly any[], K extends readonly string[]> = TTs
   void
 
 export type TTsEnumKeys<T extends readonly any[], K extends readonly string[]> = {
-  [key in K[number] as `get${Capitalize<key>}s`]?: () => KeyBy<
+  [key in K[number] as `get${Capitalize<key>}s`]: () => KeyBy<
     T,
     IndexObject<K, key> extends number ? IndexObject<K, key> : never
   >
@@ -103,3 +100,13 @@ export type TTsEnumStatic<T extends readonly any[], K extends readonly string[]>
   originalEnum: T
   originalKeys: K
 }
+
+/**
+ * 将常量字符串数组转换为枚举类型
+ */
+export type ArrayTypes<T extends readonly any[]> = T[number]
+
+/**
+ * 将 T 中的除了 K 的属性都转换为可选属性
+ */
+export type PartialWithout<T, K extends keyof T> = Pick<T, K> & Partial<Omit<T, K>>
