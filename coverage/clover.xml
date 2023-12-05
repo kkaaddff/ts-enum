@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1639705535889" clover="3.2.0">
-  <project timestamp="1639705535889" name="All files">
+<coverage generated="1701760303722" clover="3.2.0">
+  <project timestamp="1701760303722" name="All files">
     <metrics statements="42" coveredstatements="42" conditionals="1" coveredconditionals="1" methods="21" coveredmethods="21" elements="64" coveredelements="64" complexity="0" loc="42" ncloc="42" packages="1" files="2" classes="2"/>
     <file name="class.ts" path="/Users/qiczhang/Documents/js/ts-enum/src/class.ts">
       <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
       <line num="8" count="1" type="stmt"/>
       <line num="9" count="1" type="stmt"/>
       <line num="10" count="4" type="stmt"/>
-      <line num="23" count="4" type="stmt"/>
-      <line num="29" count="3" type="stmt"/>
-      <line num="31" count="3" type="stmt"/>
+      <line num="22" count="4" type="stmt"/>
+      <line num="28" count="3" type="stmt"/>
+      <line num="30" count="3" type="stmt"/>
+      <line num="31" count="6" type="stmt"/>
       <line num="32" count="6" type="stmt"/>
-      <line num="33" count="6" type="stmt"/>
-      <line num="36" count="3" type="stmt"/>
-      <line num="40" count="2" type="stmt"/>
-      <line num="44" count="1" type="stmt"/>
-      <line num="48" count="1" type="stmt"/>
-      <line num="52" count="1" type="stmt"/>
+      <line num="35" count="3" type="stmt"/>
+      <line num="39" count="2" type="stmt"/>
+      <line num="43" count="1" type="stmt"/>
+      <line num="47" count="1" type="stmt"/>
+      <line num="51" count="1" type="stmt"/>
     </file>
     <file name="func.ts" path="/Users/qiczhang/Documents/js/ts-enum/src/func.ts">
       <metrics statements="29" coveredstatements="29" conditionals="1" coveredconditionals="1" methods="13" coveredmethods="13"/>
