@@ -7,7 +7,7 @@ import { EnumOptions, TTsEnum } from './types'
 
 /**
  * 创建自定义枚举 ： keys 为自定义的 key
- * @param param 二维数组 必须使用 as const 断言 转换成类型 
+ * @param param 二维数组 必须使用 as const 断言 转换成类型
  * @type {[
 
     ['label1', 'value1', 'code1'],
@@ -68,7 +68,7 @@ export function createCustomEnum<T extends readonly any[], K extends readonly st
 
 /**
    * 创建 支持类型的枚举
-   * @param param 二维数组 必须使用 as const 断言 转换成类型 
+   * @param param 二维数组 必须使用 as const 断言 转换成类型
    * @type {[
 
     ['label1', 'value1', 'code1'],
